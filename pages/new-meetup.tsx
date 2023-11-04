@@ -25,7 +25,12 @@ const NewMeetupPage = () => {
 
     const response = await fetch("/api/new-meetup", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        image: enteredImage,
+        title: enteredTitle,
+        address: enteredAddress,
+        description: enteredDesc,
+      }),
       headers: {
         "Content-Type": "application/json",
       },

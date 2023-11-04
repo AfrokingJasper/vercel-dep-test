@@ -15,7 +15,6 @@ export default async function handler(
   if (req.method === "POST") {
     const data = req.body;
 
-    const { imatge, title, description, address } = data;
     const client = await MongoClient.connect(process.env.MONGODB_URL);
 
     const db = client.db();
@@ -27,8 +26,9 @@ export default async function handler(
 
     client.close();
     res.status(200).json({ message: "Event Added successfully", data: data });
+    return;
+  } else {
+    res.status(422).json({ message: "Invalid Request" });
+    return;
   }
-
-  res.status(422).json({ message: "Invalid Request" });
-  return;
 }
